@@ -1,5 +1,6 @@
 import React from 'react'
-import { ROLES } from '../../constants';
+import { ROLES } from '../../../constants';
+// import { ROLES } from '../../../constants';
 
 const RoleType = () => {
   return (

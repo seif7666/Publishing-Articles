@@ -1,8 +1,8 @@
 import React from "react";
-import SignIn from "./components/signin/SignIn";
+import SignIn from "./components/registration/signin/SignIn";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { LINKS } from "./constants";
-import SignUp from "./components/signup/SignUp";
+import SignUp from "./components/registration/signup/SignUp";
 
 const App = () => {
   return (

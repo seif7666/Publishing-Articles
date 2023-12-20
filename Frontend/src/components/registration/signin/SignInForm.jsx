@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router';
-import { LINKS } from '../../constants';
+import { LINKS } from '../../../constants';
 
 const SignInForm = () => {
     const [username,setUsername]= useState('');
