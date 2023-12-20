@@ -41,4 +41,5 @@ module.exports = {
     }),
   ],
   stats: 'errors-only',
+  mode:'development'
 }
