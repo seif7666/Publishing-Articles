@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router';
-import { LINKS } from '../../../constants';
+import { LINKS, ROLES } from '../../../constants';
+import { Link } from 'react-router-dom';
+import { services } from '../../../service/signIn';
 
 const SignInForm = () => {
     const [username,setUsername]= useState('');
@@ -10,10 +12,11 @@ const SignInForm = () => {
 
     const signIn=(e)=>{
         e.preventDefault();
-        setErrorMessage('Error!');
-        console.log(username);
-        if(username.length > 0)
-            navigate(LINKS.SIGNUP);
+        services.signInService.signInAndGetUser(username,password).then((user)=>{
+            navigate('/'+user.role,{user:user});
+        }).catch((message)=>{
+            setErrorMessage(message);
+        })
     }
   return (
     <div id='form-div'>
@@ -28,7 +31,11 @@ const SignInForm = () => {
             <p className='text-danger'>{errorMessage}</p>
         </div>
         <div id='sign-up-div'>
-            <p className='h6'>This is your first time? <span>SignUp</span></p>
+            <p className='h6'>This is your first time? 
+            <Link to={LINKS.SIGNUP}>
+            <span>SignUp</span>
+            </Link>
+            </p>
         </div>
     </div>
   )
