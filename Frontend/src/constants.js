@@ -1,7 +1,8 @@
 export const ROLES={
     AUTHOR_INDEX:0,
     REVIEWER_INDEX:1,
-    list:['Author', 'Reviewer']
+    ADMIN_INDEX:2,
+    list:['Author', 'Reviewer', 'Admin']
 };
 export const LINKS={
     HOME:'',

@@ -15,7 +15,6 @@ export class User{
 export class AuthorUser extends User{
     constructor(Id,firstName,lastName){
         super(Id,firstName,lastName);
-        this.articles=[];
     }
 
     getRole() {
@@ -23,3 +22,11 @@ export class AuthorUser extends User{
     }
 }
 
+export class AdminUser extends User{
+    constructor(Id,firstName,lastName){
+        super(Id,firstName,lastName);
+    }
+    getRole() {
+        return ROLES.list[ROLES.ADMIN_INDEX];
+    }
+}

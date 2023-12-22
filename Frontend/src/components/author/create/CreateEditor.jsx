@@ -7,7 +7,7 @@ import {services} from "../../../service/services";
 import { UserFactory } from "../../../model/user/UserFactory";
 import { useNavigate } from "react-router";
 import { ARTICLE_STATES, LINKS, ROLES } from "../../../constants";
-import { AuthorArticle } from "../../../model/user/Article";
+import { AuthorArticle } from "../../../model/user/AuthorArticle";
 
 const CreateEditor = () => {
   const [editor, setEditor] = useState(null);

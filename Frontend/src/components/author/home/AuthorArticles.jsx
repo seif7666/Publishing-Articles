@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { services } from "../../../service/services";
 import Loading from "../../Loading";
-import { AuthorArticle } from "../../../model/user/Article";
+import { AuthorArticle } from "../../../model/user/AuthorArticle";
 import { ARTICLE_STATES } from "../../../constants";
 import { Link } from "react-router-dom";
 

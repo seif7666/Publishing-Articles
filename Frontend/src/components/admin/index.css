@@ -1,0 +1,25 @@
+.admin-table-div{
+    width:42%;
+    height:80vh;
+    margin-right: 2em;
+}
+.admin-table-section{
+    width:100%;
+    height:100%;
+    background-color: rgb(211, 211, 211);
+    border-radius: 1em;
+    /* border: black solid 1px; */
+}
+.admin-article-header{
+    background-color:white;
+    margin-top: .5em;
+    border:rgba(150, 150, 150, .8) solid 3px;
+    border-radius: 1em;
+    width:100%;
+    display:flex;
+    padding: 1em;
+    justify-content: space-between;
+}
+.admin-article-header:hover{
+    background-color: coral;
+}

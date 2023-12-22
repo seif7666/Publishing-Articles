@@ -1,6 +1,6 @@
 {
   "users": [
-    { "id": 0, "FirstName": "Lorem", "Last Name": "Ipsum", "role": "Author" }
+    { "id": 0, "FirstName": "Lorem", "Last Name": "Ipsum", "role": "Admin" }
   ],
   "articles": [
     { "ID": 0, "Title": "Article1", "Created_Date": "07:23" },

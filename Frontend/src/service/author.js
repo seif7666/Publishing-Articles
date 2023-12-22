@@ -1,5 +1,5 @@
 import axios_api from "./axios";
-import { AuthorArticle } from "../model/user/Article";
+import { AuthorArticle } from "../model/user/AuthorArticle";
 
 export class AuthorService {
   static async getArticleHeaders(user_id, type, pageNumber) {

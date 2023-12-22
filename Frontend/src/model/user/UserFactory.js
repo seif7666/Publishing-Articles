@@ -1,5 +1,5 @@
 import { ROLES } from "../../constants";
-import { AuthorUser, User } from "./User";
+import { AdminUser, AuthorUser, User } from "./User";
 
 /* Singleton */
 export class UserFactory{
@@ -14,6 +14,9 @@ export class UserFactory{
     createUser(data){
         if(data.role==ROLES.list[ROLES.AUTHOR_INDEX])
             this.user= new AuthorUser(data.Id,data.FirstName,data.LastName);
+        else if(data.role ==ROLES.list[ROLES.ADMIN_INDEX])
+            this.user= new AdminUser(data.Id,data.FirstName,data.LastName);
+            
     }
     getUser=()=>this.user;
 }

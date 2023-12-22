@@ -1,11 +1,9 @@
 import { ARTICLE_STATES } from "../../constants";
+import { Article } from "../Article";
 
-export class AuthorArticle{
+export class AuthorArticle extends Article{
     constructor(Id=0,title='', type='',created_date=''){
-        this.Id= Id;
-        this.title= title;
-        this.created_date= created_date;
-        this.body="";
+        super(Id,title,created_date);
         this.type= type;
     }
 
