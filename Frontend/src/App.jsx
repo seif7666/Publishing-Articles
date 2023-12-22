@@ -5,18 +5,13 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SignUp from "./components/registration/signup/SignUp";
 import AuthorHome from "./components/author/AuthorHome";
 
-const getRolePage=(role)=>{
-  switch(role){
-    case ROLES[0]:return <AuthorHome />
-  }
-}
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route path={LINKS.HOME} element={<SignIn />} />
         <Route path={LINKS.SIGNUP} element={<SignUp />} />
-        <Route path={`/${ROLES[0]}`} element={<AuthorHome />} />
+        <Route path={`/${ROLES.list[ROLES.AUTHOR_INDEX]}`} element={<AuthorHome />} />
       </Routes>
     </BrowserRouter>
   );

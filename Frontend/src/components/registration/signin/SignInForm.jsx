@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router';
 import { LINKS, ROLES } from '../../../constants';
 import { Link } from 'react-router-dom';
 import { services } from '../../../service/signIn';
+import { UserFactory } from '../../../model/user/UserFactory';
 
 const SignInForm = () => {
     const [username,setUsername]= useState('');
@@ -13,7 +14,8 @@ const SignInForm = () => {
     const signIn=(e)=>{
         e.preventDefault();
         services.signInService.signInAndGetUser(username,password).then((user)=>{
-            navigate('/'+user.role,{user:user});
+            UserFactory.getInstance().createUser(user);
+            navigate('/'+UserFactory.getInstance().getUser().getRole());
         }).catch((message)=>{
             setErrorMessage(message);
         })
