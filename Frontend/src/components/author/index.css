@@ -23,3 +23,19 @@
 #select-article-type:hover{
     border:cyan solid 2px;
 }
+
+#article-headers-table{
+    margin:2em;
+    border-radius: 1em;
+    width:80%;
+    height: 50vh;
+    border: black solid 2px;
+    background-color: rgb(255, 252, 249);
+}
+.article-header-div{
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    border: black solid 2px;
+    padding: 1em;
+}

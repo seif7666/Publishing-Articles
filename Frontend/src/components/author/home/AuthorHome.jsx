@@ -1,8 +1,8 @@
 import React from 'react'
 import { useParams } from 'react-router';
-import { UserFactory } from '../../model/user/UserFactory';
-import AuthorNavBar from './AuthorNavBar';
-import './index.css';
+import { UserFactory } from '../../../model/user/UserFactory';
+import AuthorNavBar from '../AuthorNavBar';
+import '../index.css';
 import AuthorArticles from './AuthorArticles';
 const AuthorHome = () => {
     const authorUser= UserFactory.getInstance().getUser();

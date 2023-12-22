@@ -6,10 +6,16 @@ export const ROLES={
 export const LINKS={
     HOME:'/',
     SIGNUP:'/signup',
-    CREATE_ARTICLE:`/${ROLES.list[ROLES.AUTHOR_INDEX]}/create-article`,
+    CREATE_ARTICLE:`${ROLES.list[ROLES.AUTHOR_INDEX]}/create-article`,
     EDIT_ARTICLE:'edit-article'
 }
 
 export const SERVICE={
     BASE_URL:'http://localhost:3000/',
+}
+
+export const ARTICLE_STATES={
+    PUBLISHED: 'Published',
+    PENDING: 'Pending',
+    REJECTED: 'Rejected'
 }

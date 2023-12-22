@@ -3,9 +3,9 @@
     { "id": 0, "FirstName": "Lorem", "Last Name": "Ipsum", "role": "Author" }
   ],
   "articles": [
-    { "ID": 0, "Title": "Article1", "Created_At": "07:23" },
-    { "ID": 1, "Title": "Article2", "Created_At": "07:23" },
-    { "ID": 2, "Title": "Article3", "Created_At": "07:23" }
+    { "ID": 0, "Title": "Article1", "Created_Date": "07:23" },
+    { "ID": 1, "Title": "Article2", "Created_Date": "07:23" },
+    { "ID": 2, "Title": "Article3", "Created_Date": "07:23" }
   ],
   "fullArticle": [
     {

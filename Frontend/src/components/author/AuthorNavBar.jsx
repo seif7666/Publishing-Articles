@@ -8,7 +8,6 @@ const links = [
   ["Create Article", LINKS.CREATE_ARTICLE],
   ["Logout", LINKS.HOME],
 ];
-console.log(links);
 const AuthorNavBar = (props) => {
   const location = useLocation();
   console.log(location);
