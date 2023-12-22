@@ -5,10 +5,13 @@ import {UserFactory} from '../../../model/user/UserFactory';
 import { services } from '../../../service/services';
 import Loading from '../../Loading';
 import { AdminArticle } from '../../../model/admin/AdminArticle';
+import { useNavigate } from 'react-router';
+import { LINKS } from '../../../constants';
 
 const ArticlesTable=()=>{
     const [articles,setArticles]= useState([]);
     const [isLoading,setLoading]= useState(true);
+    const navigation= useNavigate();
     useEffect(()=>{
         const newArticles=[];
         services.adminServices.getArticleHeaders(1).
@@ -29,7 +32,7 @@ const ArticlesTable=()=>{
         <>
         {articles.map((article)=>{
             return(
-            <div className="admin-article-header">
+            <div className="admin-article-header" onClick={(e)=>navigation(LINKS.EDIT_ARTICLE+"/"+article.Id)}>
                 <div>
                     {article.title}
                 </div>

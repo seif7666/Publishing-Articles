@@ -6,6 +6,7 @@ import SignUp from "./components/registration/signup/SignUp";
 import AuthorHome from "./components/author/home/AuthorHome";
 import CreateArticle from "./components/author/create/CreateArticle";
 import AdminHome from "./components/admin/home/AdminHome";
+import AdminReviewArticle from "./components/admin/reviewArticle/AdminReviewArticle";
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
         {/* ---------------------------------------------------------------- */}
         {/* -----------------------Admin Pages------------------------------ */}
         <Route path={`/${ROLES.list[ROLES.ADMIN_INDEX]}`} element={<AdminHome />}/>
+        <Route path={LINKS.EDIT_ARTICLE+"/:articleId"} element={<AdminReviewArticle />}/>
         {/* ---------------------------------------------------------------- */}
 
 

@@ -8,7 +8,7 @@ export const LINKS={
     HOME:'',
     SIGNUP:'/signup',
     CREATE_ARTICLE:`${ROLES.list[ROLES.AUTHOR_INDEX]}/create-article`,
-    EDIT_ARTICLE:'edit-article'
+    EDIT_ARTICLE:`/${ROLES.list[ROLES.ADMIN_INDEX]}/edit-article`
 }
 
 export const SERVICE={
