@@ -12,13 +12,8 @@ export class UserFactory{
         return this.userFactory;
     }
     createUser(data){
-        console.log(data);
-        console.log(data.role);
-        console.log(ROLES.list[ROLES.AUTHOR_INDEX]);
-
         if(data.role==ROLES.list[ROLES.AUTHOR_INDEX])
             this.user= new AuthorUser(data.Id,data.FirstName,data.LastName);
-        console.log(this.user.getFirstName());
     }
     getUser=()=>this.user;
 }

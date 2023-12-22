@@ -4,6 +4,7 @@ import Title from './Title'
 import SignInForm from './SignInForm'
 
 const SignIn = () => {
+  console.log('IN Sign In!')
   return (
     <div>
         <Title />

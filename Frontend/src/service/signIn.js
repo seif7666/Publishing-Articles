@@ -1,6 +1,6 @@
 import axios_api from "./axios";
 
-class SignInService{
+export class SignInService{
 
     static async signInAndGetUser(username,password) {
         return new Promise(async (resolve,reject)=>{
@@ -19,7 +19,3 @@ class SignInService{
         })
     }
 }
-
-export const services={
-    signInService:SignInService
-} 

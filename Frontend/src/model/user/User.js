@@ -19,7 +19,7 @@ export class AuthorUser extends User{
     }
 
     getRole() {
-        return ROLES[ROLES.AUTHOR_INDEX];
+        return ROLES.list[ROLES.AUTHOR_INDEX];
     }
 }
 

@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router';
 import { LINKS, ROLES } from '../../../constants';
 import { Link } from 'react-router-dom';
-import { services } from '../../../service/signIn';
 import { UserFactory } from '../../../model/user/UserFactory';
+import { services } from '../../../service/services';
 
 const SignInForm = () => {
     const [username,setUsername]= useState('');

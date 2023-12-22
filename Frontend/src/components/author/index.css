@@ -1,0 +1,25 @@
+.nav-link-author{
+    text-decoration: none;
+
+}
+.nav-link-author :hover{
+    color: dimgrey;
+    font-weight: bold;
+    font-size: larger;
+}
+.active-author{
+    font-weight: bolder;
+    font-style: italic;
+}
+
+#select-article-type{
+    padding: 1em;
+    background-color: white;
+    font-weight: 600;
+    color: rgb(80, 79, 79);
+    border-radius: 15px;
+    border: grey solid 2px;
+}
+#select-article-type:hover{
+    border:cyan solid 2px;
+}
