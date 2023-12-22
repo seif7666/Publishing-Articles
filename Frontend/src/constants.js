@@ -4,7 +4,7 @@ export const ROLES={
     list:['Author', 'Reviewer']
 };
 export const LINKS={
-    HOME:'/',
+    HOME:'',
     SIGNUP:'/signup',
     CREATE_ARTICLE:`${ROLES.list[ROLES.AUTHOR_INDEX]}/create-article`,
     EDIT_ARTICLE:'edit-article'

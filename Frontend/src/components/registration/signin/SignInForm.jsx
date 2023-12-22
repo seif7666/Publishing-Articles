@@ -15,7 +15,9 @@ const SignInForm = () => {
         e.preventDefault();
         services.signInService.signInAndGetUser(username,password).then((user)=>{
             UserFactory.getInstance().createUser(user);
-            navigate('/'+UserFactory.getInstance().getUser().getRole());
+            // navigate('/'+UserFactory.getInstance().getUser().getRole());
+            navigate(LINKS.CREATE_ARTICLE);
+
         }).catch((message)=>{
             setErrorMessage(message);
         })
