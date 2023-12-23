@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 
-import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+// import { CKEditor } from "@ckeditor/ckeditor5-react";
+// import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import Loading from "../../Loading";
 import {services} from "../../../service/services";
 import { UserFactory } from "../../../model/user/UserFactory";
@@ -51,7 +51,7 @@ const CreateEditor = () => {
         </form>
       </div>
       <div style={{ marginTop: 50 }}>
-        <CKEditor
+        {/* <CKEditor
           editor={ClassicEditor}
           data="<p>Welcome to world of creativity!</p>"
           config={{
@@ -71,8 +71,8 @@ const CreateEditor = () => {
           onFocus={(event, editor) => {
             console.log("Focus.", editor);
           }}
-        />
-      </div>
+        />*/}
+      </div> 
       <button className="btn btn-primary m-4" onClick={onSubmit}>
         Create Article
       </button>

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Editor from '../../../ckeditor5/build/ckeditor';
 import { useParams } from "react-router";
 import AdminNavbar from "../AdminNavbar";
 import { AdminArticle } from "../../../model/admin/AdminArticle";
@@ -6,15 +7,14 @@ import { UserFactory } from "../../../model/user/UserFactory";
 import Loading from "../../Loading";
 import { services } from "../../../service/services";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import { Highlight } from "@ckeditor/ckeditor5-highlight";
+import { CommentsIntegration, appData } from "./Integration";
 
 const AdminArticleEditor = (props) => {
   let article = props.article;
-  const [editor, setEditor] = useState(null);
-  useEffect(() => {
-    if (editor !== null) editor.setData(article.body);
-  }, [editor]);
+  // const [editor, setEditor] = useState(null);
+  // useEffect(() => {
+  //   if (editor !== null) editor.setData(article.body);
+  // }, [editor]);
   return (
     <div>
       <div style={{ marginTop: "5em" }}>
@@ -22,37 +22,23 @@ const AdminArticleEditor = (props) => {
       </div>
       <div>
         <CKEditor
-          editor={ClassicEditor}
-          disabled={true}
-          data="<p>Welcome to world of creativity!</p>"
+        
+          editor={Editor}
+          // disabled={true}
+          data={appData.initialData}
           config={{
-            highlight: {
-              options: [
-                  {
-                      model: 'greenMarker',
-                      class: 'marker-green',
-                      title: 'Green marker',
-                      color: 'var(--ck-highlight-marker-green)',
-                      type: 'marker'
-                  },
-                  {
-                      model: 'redPen',
-                      class: 'pen-red',
-                      title: 'Red pen',
-                      color: 'var(--ck-highlight-pen-red)',
-                      type: 'pen'
-                  }
-              ]
-          },
-            toolbar: ["heading", "bold", "italic", "numberedList", "bulletedList", 'highlight', 'highlight:greenMarker'],
+            commentsOnly:true,
+            extraPlugins: [ CommentsIntegration ],
+            licenseKey:'RXJOU1RlejlaMW1hT0F3QitZd0JJRVJqamRxNkpKQVFUR2t2TWtwbWdEVjhSazBEV0htajk1KzVSTVd3LU1qQXlOREF4TWpFPQ==',
+            toolbar: ["heading", "bold", "italic", "numberedList", "bulletedList", '|','highlight', 'highlight:greenMarker', '|', 'comment', 'commentsArchive'],
           }}
           onReady={(editorr) => {
             console.log("Editor is ready to use!", editorr);
-            setEditor(editorr);
+            // setEditor(editorr);
           }}
           onChange={(event) => {
             console.log(event);
-            editor.getData();
+            // editor.getData();
           }}
           onBlur={(event, editor) => {
             console.log("Blur.", editor);
