@@ -17,7 +17,11 @@ export const SERVICE={
     SIGN_UP: 'user/'+'sign-up',
     AUTHOR_GET_ARTICLE_HEADERS:'author/articles',
     AUTHOR_CREATE_ARTICLE:'/author/article/',
-    ADMIN_GET_ADMIN_ARTICLES:'/admin/articles/'
+    ADMIN_GET_ADMIN_ARTICLES:'/admin/articles/',
+    ADMIN_ARTICLE:'/admin/article/',
+    ADMIN_ARTICLE:'/admin/article/',
+    ADMIN_ARTICLE:'/admin/article/',
+
 }
 
 export const ARTICLE_STATES={

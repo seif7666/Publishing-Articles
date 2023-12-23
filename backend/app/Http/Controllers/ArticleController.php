@@ -51,4 +51,10 @@ class ArticleController extends Controller
         //Get Previous article
         //Combine
     }
+
+    public function acceptArticle($articleId){
+        Article::updateState($articleId,'Published');
+        return Response('Success',200);
+    }
+
 }

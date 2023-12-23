@@ -33,4 +33,10 @@ class Article extends Model
         $result=Article::select('id','title','created_at')->where('written_by',$this->written_by)->get();
         return $result;
     }
+
+    public static function updateState($articleId,$state){
+        $article=Article::find($articleId);
+        $article->type=$state;
+        $article->save();
+    }
 }

@@ -2,17 +2,36 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
 use App\Models\RejectedArticle;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use RuntimeException;
 
 class RejectedArticleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
+    public function rejectArticle($articleId, Request $request){
+        //Make the article rejected.
+        $rejection=[
+            'article_id'=>$articleId,
+            'reason'=>$request['rejectionNotes'],
+        ];
+        try{
+            DB::beginTransaction();
+            Article::updateState($articleId,'Rejected');
+            $rejectionId= RejectedArticle::createOrUpdate($rejection);
+            Log::info($request['commentsRepo']);
+            throw new RuntimeException("Testing");
+            DB::commit();
+        }catch(Exception $e){
+            DB::rollBack();
+            // return $e;
+        }
+        return Response('',200);
+        //Create if it doesn't exit a new record in rejected.
+        //Add comments of rejection.
     }
 
     /**

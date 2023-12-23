@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\RejectedArticleController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Models\RejectedArticle;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,3 +29,7 @@ Route::get('/author/articles/{author_id}', [ArticleController::class, 'getArticl
 
 Route::get('/admin/articles',[ArticleController::class,'adminGetArticleHeaders']);
 Route::get('/admin/article/{articleId}',[ArticleController::class,'adminGetArticle']);
+Route::put('/admin/article/{articleId}',[ArticleController::class,'acceptArticle']);
+Route::post('/admin/article/{articleId}',[RejectedArticleController::class,'rejectArticle']);
+
+
