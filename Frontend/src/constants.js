@@ -13,7 +13,8 @@ export const LINKS={
 
 export const SERVICE={
     BASE_URL:'http://localhost:5000/api/',
-    USER_API: 'user'
+    USER_API: 'user',
+    SIGN_UP: 'user/'+'sign-up'
 }
 
 export const ARTICLE_STATES={
