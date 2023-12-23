@@ -12,9 +12,10 @@ export class UserFactory{
         return this.userFactory;
     }
     createUser(data){
-        if(data.role==ROLES.list[ROLES.AUTHOR_INDEX])
+        console.log(data);
+        if(data.type==ROLES.list[ROLES.AUTHOR_INDEX])
             this.user= new AuthorUser(data.Id,data.FirstName,data.LastName);
-        else if(data.role ==ROLES.list[ROLES.ADMIN_INDEX])
+        else if(data.type ==ROLES.list[ROLES.ADMIN_INDEX])
             this.user= new AdminUser(data.Id,data.FirstName,data.LastName);
             
     }

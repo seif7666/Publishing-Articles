@@ -5,19 +5,30 @@ import { Link } from 'react-router-dom';
 import { UserFactory } from '../../../model/user/UserFactory';
 import { services } from '../../../service/services';
 
+const AreUserNameAndPasswordValid=(username, password)=>{
+    if(username.trim().length===0){
+        alert('Username field is empty!');
+        return false;
+    }
+    if(password.trim().length===0){
+        alert('Password field is empty!');
+        return false;
+    }
+    return true;
+}
 const SignInForm = () => {
     const [username,setUsername]= useState('');
     const [password,setPassword]= useState('');
     const [errorMessage,setErrorMessage]= useState('');
     const navigate= useNavigate();
-
+ 
     const signIn=(e)=>{
         e.preventDefault();
+        if(!AreUserNameAndPasswordValid(username,password))
+            return;
         services.signInService.signInAndGetUser(username,password).then((user)=>{
             UserFactory.getInstance().createUser(user);
             navigate('/'+UserFactory.getInstance().getUser().getRole());
-            // navigate(LINKS.CREATE_ARTICLE);
-
         }).catch((message)=>{
             setErrorMessage(message);
         })
