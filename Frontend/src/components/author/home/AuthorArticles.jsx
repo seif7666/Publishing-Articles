@@ -4,6 +4,7 @@ import Loading from "../../Loading";
 import { AuthorArticle } from "../../../model/user/AuthorArticle";
 import { ARTICLE_STATES } from "../../../constants";
 import { Link } from "react-router-dom";
+import { UserFactory } from "../../../model/user/UserFactory";
 
 
 const ArticleHeader=(props)=>{
@@ -24,14 +25,15 @@ const ArticleHeader=(props)=>{
 const ArticleTable = (props) => {
   const [articles, setArticles] = useState([]);
   const [isLoading, setLoading] = useState(true);
+  const userId= UserFactory.getInstance().getUser().Id;
   useEffect(() => {
     services.authorServices
-      .getArticleHeaders(props.userID, props.type, 0)
+      .getArticleHeaders(userId, props.type, 0)
       .then((res) => {
         const newArticles=[];
         res.forEach(element => {
           console.log(element.Created_Date);
-          newArticles.push(new AuthorArticle(element.ID,element.Title,props.type,element.Created_Date));
+          newArticles.push(new AuthorArticle(element.id,element.title,props.type,element.created_at));
           setArticles(newArticles);
         });
         setTimeout(()=>setLoading(false),1000);

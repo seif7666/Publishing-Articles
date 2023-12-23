@@ -14,9 +14,9 @@ export class UserFactory{
     createUser(data){
         console.log(data);
         if(data.type==ROLES.list[ROLES.AUTHOR_INDEX])
-            this.user= new AuthorUser(data.Id,data.FirstName,data.LastName);
+            this.user= new AuthorUser(data.id,data.firstName,data.lastName);
         else if(data.type ==ROLES.list[ROLES.ADMIN_INDEX])
-            this.user= new AdminUser(data.Id,data.FirstName,data.LastName);
+            this.user= new AdminUser(data.id,data.firstName,data.lastName);
             
     }
     getUser=()=>this.user;

@@ -14,7 +14,9 @@ export const LINKS={
 export const SERVICE={
     BASE_URL:'http://localhost:5000/api/',
     USER_API: 'user',
-    SIGN_UP: 'user/'+'sign-up'
+    SIGN_UP: 'user/'+'sign-up',
+    AUTHOR_GET_ARTICLE_HEADERS:'author/articles',
+    AUTHOR_CREATE_ARTICLE:'/author/article/'
 }
 
 export const ARTICLE_STATES={

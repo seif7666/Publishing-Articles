@@ -8,7 +8,7 @@ const CreateArticle = () => {
   return (
     <div>
         <AuthorNavBar firstName={user.getFirstName()}/>
-        {/* <CreateEditor /> */}
+        <CreateEditor />
     </div>
   )
 }

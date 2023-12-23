@@ -1,9 +1,10 @@
 import React, { useRef, useState } from "react";
 
-// import { CKEditor } from "@ckeditor/ckeditor5-react";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
 // import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import Editor from "../../../ckeditor5/build/ckeditor";
 import Loading from "../../Loading";
-import {services} from "../../../service/services";
+import { services } from "../../../service/services";
 import { UserFactory } from "../../../model/user/UserFactory";
 import { useNavigate } from "react-router";
 import { ARTICLE_STATES, LINKS, ROLES } from "../../../constants";
@@ -13,16 +14,16 @@ const CreateEditor = () => {
   const [editor, setEditor] = useState(null);
   const [isWaiting, setWaiting] = useState(false);
   const navigation = useNavigate();
-  const titleRef= useRef();
+  const titleRef = useRef();
 
   const onSubmit = (e) => {
     e.preventDefault();
     setWaiting(true);
     console.log(titleRef.current.value);
-    const article=new AuthorArticle('',titleRef.current.value);
-    article.body=editor.getData();
+    const article = new AuthorArticle("", titleRef.current.value);
+    article.body = editor.getData();
     services.authorServices
-      .createArticle(UserFactory.getInstance().getUser().Id,article)
+      .createArticle(UserFactory.getInstance().getUser().Id, article)
       .then((response) => {
         alert("Published Successfully!");
         navigation("/" + ROLES.list[ROLES.AUTHOR_INDEX]);
@@ -51,11 +52,22 @@ const CreateEditor = () => {
         </form>
       </div>
       <div style={{ marginTop: 50 }}>
-        {/* <CKEditor
-          editor={ClassicEditor}
-          data="<p>Welcome to world of creativity!</p>"
+        <CKEditor
+          editor={Editor}
+          // disabled={true}
+          data={'A new era of creativity!'}
           config={{
-            toolbar: ["heading", "bold", "italic", "item", "bulletedList"],
+            // extraPlugins: [CommentsIntegration],
+            licenseKey:
+              "RXJOU1RlejlaMW1hT0F3QitZd0JJRVJqamRxNkpKQVFUR2t2TWtwbWdEVjhSazBEV0htajk1KzVSTVd3LU1qQXlOREF4TWpFPQ==",
+            toolbar: [
+              "heading",
+              "bold",
+              "italic",
+              "|",
+              "numberedList",
+              "bulletedList",
+            ],
           }}
           onReady={(editorr) => {
             console.log("Editor is ready to use!", editorr);
@@ -63,7 +75,7 @@ const CreateEditor = () => {
           }}
           onChange={(event) => {
             console.log(event);
-            editor.getData();
+            // editor.getData();
           }}
           onBlur={(event, editor) => {
             console.log("Blur.", editor);
@@ -71,8 +83,8 @@ const CreateEditor = () => {
           onFocus={(event, editor) => {
             console.log("Focus.", editor);
           }}
-        />*/}
-      </div> 
+        />
+      </div>
       <button className="btn btn-primary m-4" onClick={onSubmit}>
         Create Article
       </button>

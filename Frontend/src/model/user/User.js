@@ -5,6 +5,7 @@ export class User{
         this.Id=Id;
         this.firstName= firstName;
         this.lastName= lastName;
+        console.log(`ID is ${Id}`);
      }
 
     getRole(){};

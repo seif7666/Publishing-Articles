@@ -1,12 +1,14 @@
 import axios_api from "./axios";
 import { AuthorArticle } from "../model/user/AuthorArticle";
+import { SERVICE } from "../constants";
 
 export class AuthorService {
   static async getArticleHeaders(user_id, type, pageNumber) {
+    console.log(user_id);
     return new Promise(async (resolve, reject) => {
       try {
-        const body = { type: type, pageNumber: pageNumber };
-        const data = await axios_api.get("articles", body);
+        const data = await axios_api.get(SERVICE.AUTHOR_GET_ARTICLE_HEADERS+"/"+user_id);
+        console.log(data.data);
         resolve(data.data);
       } catch (error) {
         reject("Server not found!");
@@ -14,11 +16,11 @@ export class AuthorService {
     });
   }
   static async createArticle(user_id, article) {
-    const body = { title: article.title, body: article.body };
+    const body = { title: article.title, body: article.body, written_by:user_id };
     return new Promise(async (resolve, reject) => {
       try {
         const response = await axios_api.post(
-          "/author/article/" + user_id,
+          SERVICE.AUTHOR_CREATE_ARTICLE,
           body
         );
         if (response.status == 200) resolve("Success");
