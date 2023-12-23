@@ -3,7 +3,10 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use Exception;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
@@ -52,5 +55,19 @@ class User extends Authenticatable
         if (Hash::check($password, $data->password))
             return $data;
         return null;
+    }
+
+    public static function signUp($newUser):string{
+        try{
+            $user= new User($newUser);
+            $user->save();
+            return '';
+        }catch(Exception $e){
+            return 'Duplicate Email!';
+        }
+    }
+
+    public function articles():HasMany{
+        return $this->hasMany(Article::class);
     }
 }

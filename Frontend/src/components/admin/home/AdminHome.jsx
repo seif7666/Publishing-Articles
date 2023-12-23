@@ -14,12 +14,12 @@ const ArticlesTable=()=>{
     const navigation= useNavigate();
     useEffect(()=>{
         const newArticles=[];
-        services.adminServices.getArticleHeaders(1).
+        services.adminServices.getArticleHeaders().
         then((response)=>{
             console.log(response);
             response.forEach((res)=>{
                 console.log(res);
-                newArticles.push(new AdminArticle(res.ID,res.Title,res.Created_Date));
+                newArticles.push(new AdminArticle(res.id,res.title,res.created_at,res.firstName+","+res.lastName));
             }
             )
             setArticles(newArticles);
@@ -34,7 +34,11 @@ const ArticlesTable=()=>{
             return(
             <div className="admin-article-header" onClick={(e)=>navigation(LINKS.EDIT_ARTICLE+"/"+article.Id)}>
                 <div>
+                    {article.writtenBy}
+                </div>
+                <div>
                     {article.title}
+
                 </div>
                 <div>
                     {article.created_date}

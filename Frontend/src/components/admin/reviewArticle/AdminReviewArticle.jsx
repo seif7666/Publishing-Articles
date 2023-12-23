@@ -11,10 +11,10 @@ import { CommentsIntegration, appData } from "./Integration";
 
 const AdminArticleEditor = (props) => {
   let article = props.article;
-  // const [editor, setEditor] = useState(null);
-  // useEffect(() => {
-  //   if (editor !== null) editor.setData(article.body);
-  // }, [editor]);
+  const [editor, setEditor] = useState(null);
+  useEffect(() => {
+    // if (editor !== null) editor.setData(article.body);
+  }, [editor]);
   return (
     <div>
       <div style={{ marginTop: "5em" }}>
@@ -25,7 +25,7 @@ const AdminArticleEditor = (props) => {
         
           editor={Editor}
           // disabled={true}
-          data={appData.initialData}
+          data={article.body}
           config={{
             commentsOnly:true,
             extraPlugins: [ CommentsIntegration ],

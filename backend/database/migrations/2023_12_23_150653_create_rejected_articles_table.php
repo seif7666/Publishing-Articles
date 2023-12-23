@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('articles', function (Blueprint $table) {
+        Schema::create('rejected_articles', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('written_by')->constrained('users')->onUpdate('CASCADE')->onDelete('CASCADE');
-            $table->string('title')->unique();
-            $table->text('body');
-            $table->string('type');
+            $table->foreignId('aritcle_id')->constrained('articles')->onDelete('CASCADE')->onUpdate('CASCADE');
+            $table->text('reason');
             $table->timestamps();
         });
     }
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('articles');
+        Schema::dropIfExists('rejected_articles');
     }
 };

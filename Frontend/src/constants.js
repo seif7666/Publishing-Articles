@@ -16,7 +16,8 @@ export const SERVICE={
     USER_API: 'user',
     SIGN_UP: 'user/'+'sign-up',
     AUTHOR_GET_ARTICLE_HEADERS:'author/articles',
-    AUTHOR_CREATE_ARTICLE:'/author/article/'
+    AUTHOR_CREATE_ARTICLE:'/author/article/',
+    ADMIN_GET_ADMIN_ARTICLES:'/admin/articles/'
 }
 
 export const ARTICLE_STATES={

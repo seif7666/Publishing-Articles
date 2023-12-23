@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('articles', function (Blueprint $table) {
+        Schema::create('rejection_comments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('written_by')->constrained('users')->onUpdate('CASCADE')->onDelete('CASCADE');
-            $table->string('title')->unique();
-            $table->text('body');
-            $table->string('type');
+            $table->foreignId('rejected_article')->constrained('rejected_articles')->onDelete('CASCADE')->onUpdate('CASCADE');
+            $table->string('threadID');
+            $table->text('content');
+            $table->text('value');
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('articles');
+        Schema::dropIfExists('rejection_comments');
     }
 };

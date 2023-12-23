@@ -3,63 +3,52 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use Exception;
+use Illuminate\Http\Client\Response;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function createArticle(Request $request)
     {
-        //
+        try {
+            $validate = $request->validate([
+                'written_by' => ['required'],
+                'title' => ['required'],
+                'body' => ['required'],
+                'type' => ['required']
+            ]);
+            $article = new Article($validate);
+            $message = $article->createArticle();
+            if ($message != '')
+                return Response($message, 403);
+            return Response('Success', 200);
+        } catch (Exception $e) {
+            return $e;
+        }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function getArticleHeaders($author_id, Request $request)
     {
-        //
+        $article = new Article();
+        $article->written_by = $author_id;
+        return $article->getArticleHeaders();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function adminGetArticleHeaders()
     {
-        //
+        $articles = Article::select('title', 'articles.created_at', 'users.firstName', 'users.lastName', 'articles.id')
+            ->join('users', 'users.id', '=', 'articles.written_by')
+            ->where('articles.type', 'Pending')->get();
+        return $articles;
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Article $article)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Article $article)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Article $article)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Article $article)
-    {
-        //
+    public function adminGetArticle($articleId){
+        $response=[];
+        //Get article.
+        $article=Article::find($articleId);
+        return $article;
+        //Get Previous article
+        //Combine
     }
 }

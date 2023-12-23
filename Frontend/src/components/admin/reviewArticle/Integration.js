@@ -1,54 +1,55 @@
+import { UserFactory } from "../../../model/user/UserFactory";
+
 // Application data will be available under a global variable `appData`.
 export const appData = {
-    // Users data.
-    users: [
+  // Users data.
+  users: [
+    {
+      id: "user-1",
+      name: "Mex Haddox",
+    },
+    {
+      id: "user-5",
+      name: "Zee Croce",
+    },
+  ],
+
+  // The ID of the current user.
+  userId: "user-1",
+
+  // Comment threads data.
+  commentThreads: [
+    {
+      threadId: "thread-1",
+      comments: [
         {
-            id: 'user-1',
-            name: 'Mex Haddox'
+          commentId: "comment-1",
+          authorId: "user-1",
+          content: "<p>Are we sure we want to use a made-up disorder name?</p>",
+          createdAt: new Date("09/20/2018 14:21:53"),
+          attributes: {},
         },
         {
-            id: 'user-2',
-            name: 'Zee Croce'
-        }
-    ],
+          commentId: "comment-2",
+          authorId: "user-2",
+          content: "<p>Why not?</p>",
+          createdAt: new Date("09/21/2018 08:17:01"),
+          attributes: {},
+        },
+      ],
+      context: {
+        type: "text",
+        value: "Bilingual Personality Disorder",
+      },
+      unlinkedAt: null,
+      resolvedAt: null,
+      resolvedBy: null,
+      attributes: {},
+    },
+  ],
 
-    // The ID of the current user.
-    userId: 'user-1',
-
-    // Comment threads data.
-    commentThreads: [
-        {
-            threadId: 'thread-1',
-            comments: [
-                {
-                    commentId: 'comment-1',
-                    authorId: 'user-1',
-                    content: '<p>Are we sure we want to use a made-up disorder name?</p>',
-                    createdAt: new Date( '09/20/2018 14:21:53' ),
-                    attributes: {}
-                },
-                {
-                    commentId: 'comment-2',
-                    authorId: 'user-2',
-                    content: '<p>Why not?</p>',
-                    createdAt: new Date( '09/21/2018 08:17:01' ),
-                    attributes: {}
-                }
-            ],
-            context: {
-                type: 'text',
-                value: 'Bilingual Personality Disorder'
-            },
-            unlinkedAt: null,
-            resolvedAt: null,
-            resolvedBy: null,
-            attributes: {}
-        }
-    ],
-
-     // Editor initial data.
-     initialData:
-         `<h2>
+  // Editor initial data.
+  initialData: `<h2>
              <comment-start name="thread-1"></comment-start>
              Bilingual Personality Disorder
              <comment-end name="thread-1"></comment-end>
@@ -65,36 +66,43 @@ export const appData = {
              that different regions of the brain become more active depending on the activity.
              The structure, information and especially <strong>the culture</strong> of languages varies substantially
              and the language a person speaks is an essential element of daily life.
-         </p>`
+         </p>`,
 };
 
 export class CommentsIntegration {
-    constructor( editor ) {
-        this.editor = editor;
-    }
+  constructor(editor) {
+    this.editor = editor;
+  }
 
-    static get requires() {
-        return [ 'CommentsRepository' ];
-    }
+  static get requires() {
+    return ["CommentsRepository"];
+  }
 
-    init() {
-        const usersPlugin = this.editor.plugins.get( 'Users' );
-        const commentsRepositoryPlugin = this.editor.plugins.get( 'CommentsRepository' );
+  init() {
+    const usersPlugin = this.editor.plugins.get("Users");
+    const commentsRepositoryPlugin =
+      this.editor.plugins.get("CommentsRepository");
 
-        // Load the users data.
-        for ( const user of appData.users ) {
-            usersPlugin.addUser( user );
-        }
+    const currentUser = UserFactory.getInstance().getUser();
+    console.log(currentUser.firstName + " " + currentUser.Id);
+    usersPlugin.addUser({
+      id:'user-'+currentUser.Id,
+      name: currentUser.firstName
+    });
+    usersPlugin.defineMe('user-'+UserFactory.getInstance().getUser().Id);
+    // Load the users data.
+    // for (const user of appData.users) {
+    //     usersPlugin.addUser(user);
+    // }
 
-        // Set the current user.
-        usersPlugin.defineMe( appData.userId );
+    // Set the current user.
 
-        // Load the comment threads data.
-        for ( const commentThread of appData.commentThreads ) {
-            commentsRepositoryPlugin.addCommentThread( commentThread );
-        }
+    // Load the comment threads data.
+    // for ( const commentThread of appData.commentThreads ) {
+    //     commentsRepositoryPlugin.addCommentThread( commentThread );
+    // }
 
-        /*
+    /*
         // Set the adapter on the `CommentsRepository#adapter` property.
         commentsRepositoryPlugin.adapter = {
             addComment( data ) {
@@ -202,5 +210,5 @@ export class CommentsIntegration {
             }
 
         };*/
-    }
+  }
 }

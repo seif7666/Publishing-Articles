@@ -1,6 +1,6 @@
 import axios_api from "./axios";
 import { AuthorArticle } from "../model/user/AuthorArticle";
-import { SERVICE } from "../constants";
+import { ARTICLE_STATES, SERVICE } from "../constants";
 
 export class AuthorService {
   static async getArticleHeaders(user_id, type, pageNumber) {
@@ -16,7 +16,7 @@ export class AuthorService {
     });
   }
   static async createArticle(user_id, article) {
-    const body = { title: article.title, body: article.body, written_by:user_id };
+    const body = { title: article.title, body: article.body, written_by:user_id, type:ARTICLE_STATES.PENDING };
     return new Promise(async (resolve, reject) => {
       try {
         const response = await axios_api.post(

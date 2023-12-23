@@ -1,12 +1,13 @@
 import axios_api from "./axios";
 import { AuthorArticle } from "../model/user/AuthorArticle";
+import { SERVICE } from "../constants";
 
 export class AdminService {
-  static async getArticleHeaders(pageNumber) {
+  static async getArticleHeaders() {
     return new Promise(async (resolve, reject) => {
       try {
-        // const body = { type: type, pageNumber: pageNumber };
-        const data = await axios_api.get("articles"); // /admin/articles
+        const data = await axios_api.get(SERVICE.ADMIN_GET_ADMIN_ARTICLES);
+        console.log(data.data);
         resolve(data.data);
       } catch (error) {
         console.log(error);
@@ -21,20 +22,13 @@ export class AdminService {
         const response = await axios_api.get("/admin/article/" + id);
         if (response.status == 200) resolve(response.data);
         else {
-          console.log(response);
-          resolve({
-            body: "<p>This is a sample <strong>text</strong>",
-            title: "Mock Test",
-          });
-          // reject(response.status);
+          // console.log(response);
+          reject(response.status);
         }
       } catch (error) {
-        // console.log(error);
-        // reject("An error occured!");
-        resolve({
-          body: "<p>This is a sample <strong>text</strong>",
-          title: "Mock Test",
-        });
+        console.log(error);
+        reject("An error occured!");
+        
       }
     });
   }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -20,3 +21,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('/user', [UserController::class, 'signIn']);
+Route::post('/user/sign-up', [UserController::class, 'signUp']);
+Route::post('/author/article', [ArticleController::class, 'createArticle']);
+Route::get('/author/articles/{author_id}', [ArticleController::class, 'getArticleHeaders']);
+
+Route::get('/admin/articles',[ArticleController::class,'adminGetArticleHeaders']);
+Route::get('/admin/article/{articleId}',[ArticleController::class,'adminGetArticle']);
