@@ -28,8 +28,8 @@ Route::post('/author/article', [ArticleController::class, 'createArticle']);
 Route::post('/admin/article/{articleId}',[RejectedArticleController::class,'rejectArticle']);
 Route::get('/author/articles/{author_id}', [ArticleController::class, 'getArticleHeaders']);
 Route::get('/author/rejected-article/{article_id}', [RejectedArticleController::class, 'getRejectedArticle']);
-Route::post('/author/rejected-article/{article_id}', [RejectedArticleController::class, 'getRejectedArticle']);
 
+Route::post('/author/rejected-article/{article_id}', [RejectedArticleController::class, 'updateRejectedArticle']);
 
 
 

@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\RecentArticle;
 use App\Models\RejectedArticle;
 use App\Models\RejectionComments;
 use Exception;
+use Illuminate\Http\Client\Response;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response as HttpResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use RuntimeException;
@@ -52,51 +55,23 @@ class RejectedArticleController extends Controller
         Log::info($response);
         return $response;
     }
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+    
+    public function updateRejectedArticle(int $articleId, Request $request){
+        //Update article fields ---> [body and type(state)]
+        //Save the recent version of the article
+        //Delete the rejected article and by cascading the comments are also released!
+        try{
+            DB::beginTransaction();
+            $article=Article::find($articleId);
+            $oldBody=$article->updateRejectedArticle($request);
+            RecentArticle::createIfNotExists($article,$oldBody);            
+            RejectedArticle::where('aritcle_id',$articleId)->delete();
+            DB::commit();
+            return Response('Success',200);
+        }catch(Exception $e){
+            DB::rollBack();
+            return $e;
+        }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(RejectedArticle $rejectedArticle)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(RejectedArticle $rejectedArticle)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, RejectedArticle $rejectedArticle)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(RejectedArticle $rejectedArticle)
-    {
-        //
     }
 }

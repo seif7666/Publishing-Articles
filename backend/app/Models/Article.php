@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Article extends Model
 {
@@ -20,6 +21,9 @@ class Article extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+    public function getRecentArticle():HasOne{
+        return $this->hasOne(RecentArticle::class,'article_id');
     }
 
     public function createArticle(){
@@ -38,5 +42,14 @@ class Article extends Model
         $article=Article::find($articleId);
         $article->type=$state;
         $article->save();
+    }
+
+    public function updateRejectedArticle($request){
+        $oldBody= $this->body;
+        print_r($request['body']);
+        $this->body= $request['body'];
+        $this->type= $request['type'];
+        $this->save();
+        return $oldBody;
     }
 }
