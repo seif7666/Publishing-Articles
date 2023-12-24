@@ -3,12 +3,12 @@ import { AuthorArticle } from "../model/user/AuthorArticle";
 import { ARTICLE_STATES, SERVICE } from "../constants";
 
 export class AuthorService {
-  static async getArticleHeaders(user_id, type, pageNumber) {
+  static async getArticleHeaders(user_id) {
     console.log(user_id);
     return new Promise(async (resolve, reject) => {
       try {
         const data = await axios_api.get(SERVICE.AUTHOR_GET_ARTICLE_HEADERS+"/"+user_id);
-        console.log(data.data);
+        // console.log(data.data);
         resolve(data.data);
       } catch (error) {
         reject("Server not found!");

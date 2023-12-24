@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('rejection_comments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('rejected_article')->constrained('rejected_articles')->onDelete('CASCADE')->onUpdate('CASCADE');
-            $table->string('threadID');
+            $table->string('threadId');
             $table->text('content');
             $table->text('value');
             $table->timestamps();

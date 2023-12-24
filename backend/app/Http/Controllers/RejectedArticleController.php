@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use App\Models\RejectedArticle;
+use App\Models\RejectionComments;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -22,8 +23,11 @@ class RejectedArticleController extends Controller
             DB::beginTransaction();
             Article::updateState($articleId,'Rejected');
             $rejectionId= RejectedArticle::createOrUpdate($rejection);
-            Log::info($request['commentsRepo']);
-            throw new RuntimeException("Testing");
+            $comments= $request['commentsRepo'];
+            foreach($comments as $comment){
+                RejectionComments::createComment($comment,$rejectionId);
+            }
+            // throw new RuntimeException("Testing");
             DB::commit();
         }catch(Exception $e){
             DB::rollBack();

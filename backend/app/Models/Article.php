@@ -30,7 +30,7 @@ class Article extends Model
     }
 
     public function getArticleHeaders(){
-        $result=Article::select('id','title','created_at')->where('written_by',$this->written_by)->get();
+        $result=Article::select('id','title','created_at', 'type')->where('written_by',$this->written_by)->get();
         return $result;
     }
 
