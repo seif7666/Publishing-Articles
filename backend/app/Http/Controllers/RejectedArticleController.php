@@ -72,6 +72,5 @@ class RejectedArticleController extends Controller
             DB::rollBack();
             return $e;
         }
-
     }
 }

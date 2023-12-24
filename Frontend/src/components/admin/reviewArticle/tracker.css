@@ -1,0 +1,17 @@
+.added{
+    color:green;
+    font-weight: 600;
+}
+.removed{
+    color:red;
+    text-decoration: line-through;
+}
+#tracker-div{
+    width:90vw;
+    margin: auto;
+    border-radius: .5em;
+    background-color: antiquewhite;
+    border:rgb(146, 145, 145) solid 3px;
+    font-size: large;
+    padding: 1em;
+}

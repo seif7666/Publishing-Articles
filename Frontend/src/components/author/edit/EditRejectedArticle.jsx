@@ -6,6 +6,8 @@ import { AuthorArticle } from "../../../model/user/AuthorArticle";
 import EditOldArticle from "./EditOldArticle";
 import ViewComments from "./ViewComments";
 import Loading from "../../Loading";
+import AuthorNavBar from '../AuthorNavBar';
+import {UserFactory} from '../../../model/user/UserFactory';
 import { ARTICLE_STATES, ROLES } from "../../../constants";
 
 const EditRejectedArticle = () => {
@@ -65,6 +67,7 @@ const EditRejectedArticle = () => {
     );
   return (
     <div>
+      <AuthorNavBar firstName={UserFactory.getInstance().getUser().getFirstName()}/>
       <EditOldArticle oldArticle={article} setter={setArticle} />
       <ViewComments reason={state.reason} comments={state.comments} />
       <div>

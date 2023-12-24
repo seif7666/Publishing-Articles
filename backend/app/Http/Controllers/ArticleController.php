@@ -43,18 +43,76 @@ class ArticleController extends Controller
         return $articles;
     }
 
-    public function adminGetArticle($articleId){
-        $response=[];
+    public function adminGetArticle($articleId)
+    {
+        $response = [];
         //Get article.
-        $article=Article::find($articleId);
-        return $article;
-        //Get Previous article
-        //Combine
+        $article = Article::find($articleId);
+        $recentArticle = $article->getRecentArticle()->get()->first();
+        $tracker='';
+        if($recentArticle!=null)
+            $tracker=$this->longestCommonSubsequenceWithMarkup($recentArticle->body,$article->body);
+        return [
+            'article'=>$article,
+            'changes'=>$tracker
+        ];
     }
 
-    public function acceptArticle($articleId){
-        Article::updateState($articleId,'Published');
-        return Response('Success',200);
+    public function acceptArticle($articleId)
+    {
+        Article::updateState($articleId, 'Published');
+        return Response('Success', 200);
     }
 
+
+    function longestCommonSubsequenceWithMarkup($oldSentence, $newSentence)
+    {
+        $oldWords = explode(' ', $oldSentence);
+        $newWords = explode(' ', $newSentence);
+
+        $m = count($oldWords);
+        $n = count($newWords);
+
+        $dp = array_fill(0, $m + 1, array_fill(0, $n + 1, 0));
+
+        for ($i = 1; $i <= $m; $i++) {
+            for ($j = 1; $j <= $n; $j++) {
+                if ($oldWords[$i - 1] == $newWords[$j - 1]) {
+                    $dp[$i][$j] = $dp[$i - 1][$j - 1] + 1;
+                } else {
+                    $dp[$i][$j] = max($dp[$i - 1][$j], $dp[$i][$j - 1]);
+                }
+            }
+        }
+
+        $lcs = [];
+        $i = $m;
+        $j = $n;
+
+        while ($i > 0 && $j > 0) {
+            if ($oldWords[$i - 1] == $newWords[$j - 1]) {
+                array_unshift($lcs, $oldWords[$i - 1]);
+                $i--;
+                $j--;
+            } elseif ($dp[$i - 1][$j] > $dp[$i][$j - 1]) {
+                array_unshift($lcs, "<--" . $oldWords[$i - 1] . "-->");
+                $i--;
+            } else {
+                array_unshift($lcs, "<++" . $newWords[$j - 1] . "++>");
+                $j--;
+            }
+        }
+
+        while ($i > 0) {
+            array_unshift($lcs, "<--" . $oldWords[$i - 1] . "-->");
+            $i--;
+        }
+
+        while ($j > 0) {
+            array_unshift($lcs, "<++" . $newWords[$j - 1] . "++>");
+            $j--;
+        }
+
+        return implode(' ', $lcs);
+    }
 }

@@ -9,19 +9,19 @@ import { services } from "../../../service/services";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import { CommentsIntegration, appData } from "./Integration";
 import { LINKS, ROLES } from "../../../constants";
+import BodyTracker from "./BodyTracker";
 
-
-function encapsulateComments(comments){
-  const totalComments=[];
-  for(let thread of comments){
-    for(let innerComment of thread.comments){
-      const record={
-        threadId:thread.id,
-        contextType:thread.context.type,
-        contextValue:thread.context.value,
-        commentId:innerComment.id,
-        content:innerComment.content,
-        createdAt:innerComment.createdAt
+function encapsulateComments(comments) {
+  const totalComments = [];
+  for (let thread of comments) {
+    for (let innerComment of thread.comments) {
+      const record = {
+        threadId: thread.id,
+        contextType: thread.context.type,
+        contextValue: thread.context.value,
+        commentId: innerComment.id,
+        content: innerComment.content,
+        createdAt: innerComment.createdAt,
       };
       totalComments.push(record);
     }
@@ -40,7 +40,7 @@ const AdminArticleEditor = (props) => {
   };
   const resolve = (message) => {
     alert(message);
-    navigation("/"+ROLES.list[ROLES.ADMIN_INDEX]);
+    navigation("/" + ROLES.list[ROLES.ADMIN_INDEX]);
   };
   const reject = (errorMessage) => alert(errorMessage);
   const acceptArticle = () => {
@@ -57,7 +57,7 @@ const AdminArticleEditor = (props) => {
       adminId: UserFactory.getInstance().getUser().Id,
     };
     services.adminServices
-      .rejectArticle(article.Id,body)
+      .rejectArticle(article.Id, body)
       .then((response) => resolve("Successfully Rejected!"))
       .catch(reject);
   };
@@ -107,7 +107,6 @@ const AdminArticleEditor = (props) => {
           }}
         />
       </div>
-      <div>{JSON.stringify(comments)}</div>
       <div
         style={{
           display: "flex",
@@ -119,7 +118,9 @@ const AdminArticleEditor = (props) => {
         <button className="btn btn-success" onClick={acceptArticle}>
           Accept
         </button>
-        <button className="btn btn-danger" onClick={rejectArticle}>Reject</button>
+        <button className="btn btn-danger" onClick={rejectArticle}>
+          Reject
+        </button>
       </div>
     </div>
   );
@@ -128,21 +129,33 @@ const AdminArticleEditor = (props) => {
 const AdminReviewArticle = () => {
   const { articleId } = useParams();
   const [article, setArticle] = useState(null);
+  const [changes, setChanges] = useState("");
   const user = UserFactory.getInstance().getUser();
   useEffect(() => {
     services.adminServices
       .getArticle(articleId)
       .then((data) => {
-        const newArticle = new AdminArticle(articleId, data.title, "", "");
-        newArticle.body = data.body;
+        const newArticle = new AdminArticle(
+          articleId,
+          data.article.title,
+          "",
+          ""
+        );
+        newArticle.body = data.article.body;
         setArticle(newArticle);
+        if (data.recentArticle !== null) setChanges(data.changes);
       })
       .catch((rejection) => alert(rejection));
   }, []);
   return (
     <div>
       <AdminNavbar firstName={user.getFirstName()} />
-      {article !== null && <AdminArticleEditor article={article} />}
+      {article !== null && (
+        <div>
+          <AdminArticleEditor article={article} />
+          <BodyTracker changes={changes} />
+        </div>
+      )}
       {article === null && <Loading />}
     </div>
   );

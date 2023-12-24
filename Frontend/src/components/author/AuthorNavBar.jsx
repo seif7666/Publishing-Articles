@@ -10,7 +10,6 @@ const links = [
 ];
 const AuthorNavBar = (props) => {
   const location = useLocation();
-  console.log(location);
   const getLiElement = (link) => {
     const name = link[0];
     const routeLink = "/"+link[1];
