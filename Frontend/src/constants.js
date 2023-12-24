@@ -8,7 +8,8 @@ export const LINKS={
     HOME:'',
     SIGNUP:'/signup',
     CREATE_ARTICLE:`${ROLES.list[ROLES.AUTHOR_INDEX]}/create-article`,
-    EDIT_ARTICLE:`/${ROLES.list[ROLES.ADMIN_INDEX]}/edit-article`
+    EDIT_ARTICLE:`/${ROLES.list[ROLES.ADMIN_INDEX]}/edit-article`,
+    EDIT_REJECTED_ARTICLE:`/${ROLES.list[ROLES.AUTHOR_INDEX]}/edit-rejected-article`
 }
 
 export const SERVICE={
@@ -17,6 +18,7 @@ export const SERVICE={
     SIGN_UP: 'user/'+'sign-up',
     AUTHOR_GET_ARTICLE_HEADERS:'author/articles',
     AUTHOR_CREATE_ARTICLE:'/author/article/',
+    AUTHOR_REJECTED_ARTICLE:'/author/rejected-article',
     ADMIN_GET_ADMIN_ARTICLES:'/admin/articles/',
     ADMIN_ARTICLE:'/admin/article/',
     ADMIN_ARTICLE:'/admin/article/',

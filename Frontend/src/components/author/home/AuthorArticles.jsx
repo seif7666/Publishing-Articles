@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { services } from "../../../service/services";
 import Loading from "../../Loading";
 import { AuthorArticle } from "../../../model/user/AuthorArticle";
-import { ARTICLE_STATES } from "../../../constants";
+import { ARTICLE_STATES, LINKS } from "../../../constants";
 import { Link } from "react-router-dom";
 import { UserFactory } from "../../../model/user/UserFactory";
 
@@ -27,7 +27,7 @@ const ArticleHeader = (props) => {
         }}
       >
         {article.created_date}
-        {article.isEditable() && <Link >Edit</Link>}
+        {article.isEditable() && <Link to={LINKS.EDIT_REJECTED_ARTICLE+"/"+article.Id}>Edit</Link>}
       </div>
     </div>
   );

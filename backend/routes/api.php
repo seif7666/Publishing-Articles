@@ -25,7 +25,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/user', [UserController::class, 'signIn']);
 Route::post('/user/sign-up', [UserController::class, 'signUp']);
 Route::post('/author/article', [ArticleController::class, 'createArticle']);
+Route::post('/admin/article/{articleId}',[RejectedArticleController::class,'rejectArticle']);
 Route::get('/author/articles/{author_id}', [ArticleController::class, 'getArticleHeaders']);
+Route::get('/author/rejected-article/{article_id}', [RejectedArticleController::class, 'getRejectedArticle']);
+Route::post('/author/rejected-article/{article_id}', [RejectedArticleController::class, 'getRejectedArticle']);
+
+
+
 
 Route::get('/admin/articles',[ArticleController::class,'adminGetArticleHeaders']);
 Route::get('/admin/article/{articleId}',[ArticleController::class,'adminGetArticle']);

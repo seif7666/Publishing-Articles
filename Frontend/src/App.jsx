@@ -7,6 +7,7 @@ import AuthorHome from "./components/author/home/AuthorHome";
 import CreateArticle from "./components/author/create/CreateArticle";
 import AdminHome from "./components/admin/home/AdminHome";
 import AdminReviewArticle from "./components/admin/reviewArticle/AdminReviewArticle";
+import EditRejectedArticle from "./components/author/edit/EditRejectedArticle";
 
 const App = () => {
   return (
@@ -17,6 +18,8 @@ const App = () => {
         {/* ------------------------Author Pages---------------------------- */}
         <Route path={`/${ROLES.list[ROLES.AUTHOR_INDEX]}`} element={<AuthorHome />} />
         <Route path={`${LINKS.CREATE_ARTICLE}`} element={<CreateArticle />} />
+        <Route path={`${LINKS.EDIT_REJECTED_ARTICLE}/:articleId`} element={<EditRejectedArticle/>} />
+
         {/* ---------------------------------------------------------------- */}
         {/* -----------------------Admin Pages------------------------------ */}
         <Route path={`/${ROLES.list[ROLES.ADMIN_INDEX]}`} element={<AdminHome />}/>

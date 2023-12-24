@@ -34,4 +34,12 @@ export class AuthorService {
       }
     });
   }
+  static updateRejectedArticle(articleId, body){
+    return axios_api.put(SERVICE.AUTHOR_REJECTED_ARTICLE+"/"+articleId,body);
+  }
+
+  static getRejectedArticle(articleId){
+    return axios_api.get(SERVICE.AUTHOR_REJECTED_ARTICLE+"/"+articleId);
+  }
+
 }

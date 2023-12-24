@@ -38,6 +38,20 @@ class RejectedArticleController extends Controller
         //Add comments of rejection.
     }
 
+    public function getRejectedArticle(int $articleId){
+        //Get original article.
+        $article= Article::find($articleId);
+        $rejectedArticle= RejectedArticle::where('aritcle_id',$articleId)->get()->first();
+        $comments= RejectionComments::where('rejected_article',$rejectedArticle->id)->get()->all();
+
+        $response=[
+            'article'=>$article,
+            'rejectedArticle'=>$rejectedArticle,
+            'comments'=>$comments
+        ];
+        Log::info($response);
+        return $response;
+    }
     /**
      * Show the form for creating a new resource.
      */
