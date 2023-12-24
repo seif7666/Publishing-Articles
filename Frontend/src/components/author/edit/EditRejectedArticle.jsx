@@ -54,7 +54,6 @@ const EditRejectedArticle = () => {
           alert("Update Successful!");
           navigate(`/${ROLES.list[ROLES.AUTHOR_INDEX]}`);
         }
-        alert(response.data);
       })
       .catch((rejection) => alert(rejection));
   };

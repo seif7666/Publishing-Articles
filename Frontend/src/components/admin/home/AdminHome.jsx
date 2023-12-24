@@ -8,6 +8,11 @@ import { AdminArticle } from '../../../model/admin/AdminArticle';
 import { useNavigate } from 'react-router';
 import { LINKS } from '../../../constants';
 
+
+const getDate=(created_at)=>{
+    let date=new Date(created_at);
+    return `${date.getDate()}-${date.getMonth()}-${date.getFullYear()}`;
+}
 const ArticlesTable=()=>{
     const [articles,setArticles]= useState([]);
     const [isLoading,setLoading]= useState(true);
@@ -41,7 +46,7 @@ const ArticlesTable=()=>{
 
                 </div>
                 <div>
-                    {article.created_date}
+                    {getDate(article.created_date)}
                 </div>
 
             </div>

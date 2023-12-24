@@ -1,9 +1,14 @@
 #title-div{
-    text-align: center;
+    /* text-align: center; */
+    margin-left:5em;
     padding-top: 10rem;
 }
+#title-div h1{
+    /* font-size: xx-large; */
+    font-weight: 900;
+}
 #form-div{
-    width: 80%;
+    /* width: 80%; */
     margin: auto;
     margin-top: 5rem;
     text-align: center;
@@ -25,7 +30,13 @@
     font-size: large;
     text-decoration: underline;
     font-weight: bold;
+    color: #ddccaa;
 }
 #sign-up-div span:hover{
     color: aqua;
+}
+
+#sign-in-btn::{
+    background-color: beige;
+    /* color: black; */
 }

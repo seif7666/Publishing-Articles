@@ -13,9 +13,8 @@ const fieldColors = new Map([
 ]);
 const ArticleHeader = (props) => {
   let article = new AuthorArticle();
-  
   article = props.article;
-  console.log(fieldColors.get(article.type));
+  let date= new Date(article.created_date);
   return (
     <div className={`article-header-div ${fieldColors.get(article.type)}`} >
       <h5 className="h5">{article.title}</h5>
@@ -26,7 +25,8 @@ const ArticleHeader = (props) => {
           width: "25%",
         }}
       >
-        {article.created_date}
+       <span style={{fontSize:'large', fontWeight:'bold'}}>
+         {`${date.getDate()}-${date.getMonth()}-${date.getFullYear()}`}</span>
         {article.isEditable() && <Link to={LINKS.EDIT_REJECTED_ARTICLE+"/"+article.Id}>Edit</Link>}
       </div>
     </div>
@@ -38,11 +38,10 @@ const ArticleTable = (props) => {
   const userId = UserFactory.getInstance().getUser().Id;
   useEffect(() => {
     services.authorServices
-      .getArticleHeaders(userId, props.type, 0)
+      .getArticleHeaders(userId, '', 0)
       .then((res) => {
         const newArticles = [];
         res.forEach((element) => {
-          console.log(element);
           newArticles.push(
             new AuthorArticle(
               element.id,
@@ -68,29 +67,10 @@ const ArticleTable = (props) => {
 };
 
 const AuthorArticles = () => {
-  const articleStates = [
-    ARTICLE_STATES.REJECTED,
-    ARTICLE_STATES.PUBLISHED,
-    ARTICLE_STATES.PENDING,
-  ];
-  const [state, setState] = useState(articleStates[0]);
   return (
     <div style={{ margin: 20, marginTop: "5em" }}>
-      <div className="input-group">
-        <select
-          id="select-article-type"
-          onChange={(event) => {
-            setState(event.target.value);
-            console.log(state);
-          }}
-        >
-          {articleStates.map((state) => (
-            <option value={state}>{state}</option>
-          ))}
-        </select>
-      </div>
       <div>
-        <ArticleTable type={state} />
+        <ArticleTable />
       </div>
     </div>
   );
