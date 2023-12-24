@@ -74,20 +74,20 @@ php artisan serve --port 5000
 ```
 
 ### Step2: Launching the frontend application:
-- [] Navigate to the folder
+- [ ] Navigate to the folder
   ```bash
     cd Frontend
   ```
-- [] install packages
+- [ ] install packages
   ```bash
     npm install
   ```
-- [] build project
+- [ ] build project
   ```bash
    npm run build
   ```
--[] You can see the built application in a created **dist** directory.
--[] Frontend is configured to communicate with the backend on localhost:5000.
+- [ ] You can see the built application in a created **dist** directory.
+- [ ] Frontend is configured to communicate with the backend on localhost:5000.
 
 ## Approach
   * This project was splitted during developing on iterations which were:
